@@ -1,0 +1,52 @@
+plugins {
+    alias(libs.plugins.springboot.dependency.management)
+    alias(libs.plugins.openapi.generator)
+    alias(libs.plugins.springboot)
+    alias(libs.plugins.kotlin.jvm)
+    alias(libs.plugins.kotlin.spring)
+    alias(libs.plugins.spotless)
+}
+
+group = "com.yonatankarp"
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // Spring Boot
+    implementation(libs.bundles.springboot.all)
+
+    // Kotlin
+    implementation(libs.bundles.kotlin.all)
+
+    // Persistence
+    runtimeOnly(libs.postgresql)
+    implementation(libs.bundles.persistence.support.all)
+
+    // Tests
+    testImplementation(platform(libs.testcontainers.bom))
+    testImplementation(libs.bundles.test.all)
+//    {
+//        exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
+//    }
+}
+
+tasks {
+    jar {
+        enabled = false
+    }
+
+    build {
+        finalizedBy(spotlessApply)
+    }
+
+    test {
+        useJUnitPlatform()
+        finalizedBy(spotlessApply)
+    }
+}
+
+kotlin {
+    jvmToolchain(21)
+}
