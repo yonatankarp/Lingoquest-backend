@@ -1,6 +1,7 @@
 package com.yonatan.learnlanguage.adapters.output
 
 import com.yonatan.learnlanguage.application.ports.QuizGenerator
+import com.yonatan.learnlanguage.domain.entity.Answer
 import com.yonatan.learnlanguage.domain.entity.FillInTheBlankQuestion
 import com.yonatan.learnlanguage.domain.entity.MultipleChoiceQuestion
 import com.yonatan.learnlanguage.domain.entity.Question
@@ -15,19 +16,30 @@ class PredefinedQuizGenerator : QuizGenerator {
             SingleAnswerQuestion(
                 id = UUID.randomUUID(),
                 content = "What is 'Hello' in Spanish?",
-                options = listOf("Hola", "Bonjour"),
-                correctAnswer = "Hola"
+                options = listOf(
+                    Answer(content = "Hola", isCorrect = true),
+                    Answer(content = "Bonjour", isCorrect = false)
+                ),
             ),
             MultipleChoiceQuestion(
                 id = UUID.randomUUID(),
                 content = "Which of the following are programming languages?",
-                options = listOf("Java", "Python", "Cucumber", "Lettuce"),
-                correctAnswers = listOf("Java", "Python")
+                options = listOf(
+                    Answer(content = "Java", isCorrect = true),
+                    Answer(content = "Python", isCorrect = true),
+                    Answer(content = "Cucumber", isCorrect = false),
+                    Answer(content = "Lettuce", isCorrect = false),
+                ),
             ),
             FillInTheBlankQuestion(
                 id = UUID.randomUUID(),
                 content = "The capital of France is ___.",
-                correctAnswer = "Paris"
+                correctAnswer = listOf(
+                    Answer(
+                        content = "Paris",
+                        isCorrect = true
+                    )
+                )
             )
         )
     }

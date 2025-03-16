@@ -6,6 +6,8 @@ import com.yonatan.learnlanguage.domain.entity.Question
 import com.yonatan.learnlanguage.domain.entity.Quiz
 import com.yonatan.learnlanguage.domain.entity.SingleAnswerQuestion
 
+// TODO: refactor all of this...
+
 data class QuizDto(
     val id: String,
     val status: String,
@@ -16,7 +18,7 @@ data class QuestionDto(
     val id: String,
     val content: String,
     val options: List<String>?,
-    val correctAnswer: String?
+    val correctAnswer: String?,
 )
 
 fun Quiz.toDto(): QuizDto {
@@ -39,8 +41,8 @@ private fun SingleAnswerQuestion.toDto(): QuestionDto {
     return QuestionDto(
         id = this.id.toString(),
         content = this.content,
-        options = this.options,
-        correctAnswer = this.correctAnswer
+        options = this.options.map { it.content },
+        correctAnswer = this.options.first { it.isCorrect }.content
     )
 }
 
@@ -48,8 +50,8 @@ private fun MultipleChoiceQuestion.toDto(): QuestionDto {
     return QuestionDto(
         id = this.id.toString(),
         content = this.content,
-        options = this.options,
-        correctAnswer = this.correctAnswers.joinToString(", ")
+        options = this.options.map { it.content },
+        correctAnswer = this.options.filter { it.isCorrect }.map { it.content }
     )
 }
 
@@ -58,6 +60,6 @@ private fun FillInTheBlankQuestion.toDto(): QuestionDto {
         id = this.id.toString(),
         content = this.content,
         options = null,
-        correctAnswer = this.correctAnswer
+        correctAnswer = this.correctAnswer.joinToString(", ")
     )
 }

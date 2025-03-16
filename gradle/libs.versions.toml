@@ -24,8 +24,7 @@ kotlinx_coroutines_test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-t
 
 # Spring Boot
 springboot_actuator_starter = { module = "org.springframework.boot:spring-boot-starter-actuator" }
-springboot_jdbc_starter = { module = "org.springframework.boot:spring-boot-starter-jdbc" }
-springboot_jooq_starter = { module = "org.springframework.boot:spring-boot-starter-jooq" }
+springboot_data_jpa = { module = "org.springframework.boot:spring-boot-starter-data-jpa" }
 springboot_test_starter = { module = "org.springframework.boot:spring-boot-starter-test" }
 springboot_validation_starter = { module = "org.springframework.boot:spring-boot-starter-validation" }
 springboot_web_starter = { module = "org.springframework.boot:spring-boot-starter-webflux" }
@@ -63,8 +62,7 @@ kotlin_all = [
 
 springboot_all = [
     "springboot_actuator_starter",
-#    "springboot_jdbc_starter",
-#    "springboot_jooq_starter",
+    "springboot_data_jpa",
     "springboot_validation_starter",
     "springboot_web_starter",
 ]
