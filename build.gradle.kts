@@ -43,7 +43,6 @@ tasks {
 
     test {
         useJUnitPlatform()
-        finalizedBy(spotlessApply)
     }
 }
 
@@ -65,4 +64,12 @@ spotless {
         // see https://github.com/shyiko/ktlint#standard-rules
         ktlint("1.5.0")
     }
+}
+
+val tasksDependencies = mapOf(
+    "spotlessKotlin" to listOf("processResources", "compileKotlin"),
+)
+
+tasksDependencies.forEach { (taskName, dependencies) ->
+    tasks.findByName(taskName)?.dependsOn(dependencies)
 }

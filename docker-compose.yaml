@@ -1,7 +1,7 @@
 version: "3.9"
 services:
   postgres:
-    container_name: learn-language-postgres
+    container_name: lingoquest-postgres
     networks:
       - proxynet
     image: postgres:14
@@ -9,7 +9,7 @@ services:
     environment:
       POSTGRES_USER: "postgres"
       POSTGRES_PASSWORD: "secret"
-      POSTGRES_DB: "learn-language"
+      POSTGRES_DB: "lingoquest"
     ports:
       - "5432:5432"
     expose:
@@ -17,4 +17,4 @@ services:
 
 networks:
   proxynet:
-    name: learn-language-network
+    name: lingoquest-network
