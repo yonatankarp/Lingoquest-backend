@@ -11,7 +11,7 @@ import com.yonatan.learnlanguage.domain.entity.SingleAnswerQuestion
 data class QuizDto(
     val id: String,
     val status: String,
-    val questions: List<QuestionDto>
+    val questions: List<QuestionDto>,
 )
 
 data class QuestionDto(
@@ -21,45 +21,40 @@ data class QuestionDto(
     val correctAnswer: String?,
 )
 
-fun Quiz.toDto(): QuizDto {
-    return QuizDto(
+fun Quiz.toDto(): QuizDto =
+    QuizDto(
         id = this.id.toString(),
         status = this.status.name,
-        questions = this.questions.map { it.toDto() }
+        questions = this.questions.map { it.toDto() },
     )
-}
 
-private fun Question.toDto(): QuestionDto {
-    return when (this) {
+private fun Question.toDto(): QuestionDto =
+    when (this) {
         is SingleAnswerQuestion -> toDto()
         is MultipleChoiceQuestion -> toDto()
         is FillInTheBlankQuestion -> toDto()
     }
-}
 
-private fun SingleAnswerQuestion.toDto(): QuestionDto {
-    return QuestionDto(
+private fun SingleAnswerQuestion.toDto(): QuestionDto =
+    QuestionDto(
         id = this.id.toString(),
         content = this.content,
         options = this.options.map { it.content },
-        correctAnswer = this.options.first { it.isCorrect }.content
+        correctAnswer = this.options.first { it.isCorrect }.content,
     )
-}
 
-private fun MultipleChoiceQuestion.toDto(): QuestionDto {
-    return QuestionDto(
+private fun MultipleChoiceQuestion.toDto(): QuestionDto =
+    QuestionDto(
         id = this.id.toString(),
         content = this.content,
         options = this.options.map { it.content },
-        correctAnswer = this.options.filter { it.isCorrect }.map { it.content }
+        correctAnswer = this.options.filter { it.isCorrect }.map { it.content },
     )
-}
 
-private fun FillInTheBlankQuestion.toDto(): QuestionDto {
-    return QuestionDto(
+private fun FillInTheBlankQuestion.toDto(): QuestionDto =
+    QuestionDto(
         id = this.id.toString(),
         content = this.content,
         options = null,
-        correctAnswer = this.correctAnswer.joinToString(", ")
+        correctAnswer = this.correctAnswer.joinToString(", "),
     )
-}

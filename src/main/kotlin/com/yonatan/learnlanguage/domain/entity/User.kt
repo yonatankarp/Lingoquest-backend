@@ -7,5 +7,5 @@ data class User(
     val id: UUID,
     val username: String,
     val email: String,
-    val languagePreferences: List<Language>
+    val languagePreferences: List<Language>,
 )

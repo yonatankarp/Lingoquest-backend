@@ -8,7 +8,6 @@ data class Quiz(
     val questions: List<Question>,
     val status: QuizStatus,
 ) {
-
     fun completeQuiz(): Quiz {
         require(this.status == QuizStatus.OPEN) { "Quiz already completed or abandoned" }
         return copy(status = QuizStatus.COMPLETED)

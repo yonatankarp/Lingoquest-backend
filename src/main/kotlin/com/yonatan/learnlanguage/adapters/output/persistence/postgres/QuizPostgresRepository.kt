@@ -4,8 +4,8 @@ import com.yonatan.learnlanguage.adapters.output.persistence.postgres.mappers.Qu
 import com.yonatan.learnlanguage.adapters.output.persistence.postgres.mappers.QuizMapper.toEntity
 import com.yonatan.learnlanguage.application.ports.QuizRepository
 import com.yonatan.learnlanguage.domain.entity.Quiz
-import java.util.*
 import org.springframework.stereotype.Repository
+import java.util.UUID
 
 @Repository
 class QuizPostgresRepository(

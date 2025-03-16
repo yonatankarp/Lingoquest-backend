@@ -15,14 +15,11 @@ data class AnswerData(
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     var id: Long? = null,
-
     @Column(nullable = false)
     var answer: String? = null,
-
     @Column(nullable = false)
     var isCorrect: Boolean = false,
-
     @ManyToOne
     @JoinColumn(name = "question_id", nullable = false)
-    var question: QuestionData? = null
+    var question: QuestionData? = null,
 )

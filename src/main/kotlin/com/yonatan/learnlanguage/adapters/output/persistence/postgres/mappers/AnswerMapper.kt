@@ -4,11 +4,10 @@ import com.yonatan.learnlanguage.adapters.output.persistence.postgres.data.Answe
 import com.yonatan.learnlanguage.domain.entity.Answer
 
 object AnswerMapper {
-
     fun Answer.toEntity() =
         AnswerData(
             answer = content,
-            isCorrect = isCorrect
+            isCorrect = isCorrect,
         )
 
     fun List<Answer>.toEntity(): List<AnswerData> = map { it.toEntity() }
@@ -16,11 +15,10 @@ object AnswerMapper {
     fun toDomain(answerData: AnswerData): Answer =
         Answer(
             content = requireNotNull(answerData.answer) { "Answer content must not be null" },
-            isCorrect = answerData.isCorrect
+            isCorrect = answerData.isCorrect,
         )
 
     fun List<AnswerData>.toDomain() = map { toDomain(it) }
 
-    fun List<AnswerData>.findAllCorrectAnswers(): List<Answer> =
-        filter { it.isCorrect }.map { toDomain(it) }
+    fun List<AnswerData>.findAllCorrectAnswers(): List<Answer> = filter { it.isCorrect }.map { toDomain(it) }
 }

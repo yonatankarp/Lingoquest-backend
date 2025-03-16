@@ -50,3 +50,19 @@ tasks {
 kotlin {
     jvmToolchain(21)
 }
+
+spotless {
+    kotlin {
+        target(
+            fileTree(projectDir) {
+                include("**/*.kt")
+                exclude(
+                    "**/.gradle/**",
+                    "**/build/generated/**"
+                )
+            }
+        )
+        // see https://github.com/shyiko/ktlint#standard-rules
+        ktlint("1.5.0")
+    }
+}

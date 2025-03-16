@@ -9,7 +9,7 @@ import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 import jakarta.persistence.OneToMany
 import jakarta.persistence.Table
-import java.util.*
+import java.util.UUID
 
 @Entity
 @Table(name = "quizzes")
@@ -17,12 +17,9 @@ data class QuizData(
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     var id: Long? = null,
-
     @Column(nullable = false, unique = true)
     var quizId: UUID? = null,
-
     @OneToMany(mappedBy = "quiz", cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
     var questions: List<QuestionData> = emptyList(),
-
-    var status: String? = null
+    var status: String? = null,
 )

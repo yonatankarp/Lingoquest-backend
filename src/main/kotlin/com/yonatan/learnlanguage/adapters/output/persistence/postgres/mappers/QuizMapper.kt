@@ -6,16 +6,14 @@ import com.yonatan.learnlanguage.domain.entity.Quiz
 import com.yonatan.learnlanguage.domain.valueobject.QuizStatus
 
 object QuizMapper {
-
-    fun Quiz.toEntity(): QuizData {
-        return QuizData(
+    fun Quiz.toEntity(): QuizData =
+        QuizData(
             quizId = id,
             status = status.name,
-            questions = questions.map { it.toEntity() }
+            questions = questions.map { it.toEntity() },
         ).apply {
             questions.forEach { it.quiz = this }
         }
-    }
 
     fun QuizData.toDomain(): Quiz {
         val id = requireNotNull(quizId) { "Quiz ID must not be null" }
@@ -24,7 +22,7 @@ object QuizMapper {
         return Quiz(
             id = id,
             status = QuizStatus.valueOf(status),
-            questions = questions.map { QuestionMapper.toDomain(it) }
+            questions = questions.map { QuestionMapper.toDomain(it) },
         )
     }
 }

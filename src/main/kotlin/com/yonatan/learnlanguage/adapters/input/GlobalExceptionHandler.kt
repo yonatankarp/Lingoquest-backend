@@ -8,19 +8,15 @@ import org.springframework.web.bind.annotation.ExceptionHandler
 
 @ControllerAdvice
 class GlobalExceptionHandler {
-
     @ExceptionHandler(QuizNotFoundException::class)
-    fun handleQuizNotFoundException(exception: QuizNotFoundException): ResponseEntity<String> {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(exception.message)
-    }
+    fun handleQuizNotFoundException(exception: QuizNotFoundException): ResponseEntity<String> =
+        ResponseEntity.status(HttpStatus.NOT_FOUND).body(exception.message)
 
     @ExceptionHandler(IllegalArgumentException::class)
-    fun handleIllegalArgumentException(exception: IllegalArgumentException): ResponseEntity<String> {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(exception.message)
-    }
+    fun handleIllegalArgumentException(exception: IllegalArgumentException): ResponseEntity<String> =
+        ResponseEntity.status(HttpStatus.BAD_REQUEST).body(exception.message)
 
     @ExceptionHandler(Exception::class)
-    fun handleGenericException(exception: Exception): ResponseEntity<String> {
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An unexpected error occurred: ${exception.message}")
-    }
+    fun handleGenericException(exception: Exception): ResponseEntity<String> =
+        ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An unexpected error occurred: ${exception.message}")
 }
